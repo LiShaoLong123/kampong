@@ -1,0 +1,77 @@
+.register_content{
+	overflow: auto;
+	zoom: 1;
+	padding: 20px;
+	margin: 0 auto;
+	height: 500px;
+	border: 1px solid #e1e8ed;
+}
+.register_content img{
+	width: 500px;
+	/*border-right: 1px solid #e1e8ed;*/
+	float: left;
+}
+.register_content>div{
+	float: left;
+	position: absolute;
+	width: 430px;
+	margin: auto 0 ;
+	margin-left: 500px;
+	height: 450px;
+}
+.update>div{
+	float: left;
+	width: 430px;
+	margin: auto 0 ;
+	height: 450px;
+	text-align: center;
+	margin-left: 180px;
+}
+.register_content>div>form{
+	margin-top: 90px;
+}
+.register_content>div>form>div,.update>div>form>div{
+	margin:10px;
+}
+
+.register_content>div>form>div>label,.update>div>form>div>label{
+	color: #666;
+	font-weight: normal;
+	width: 70px;
+	display: inline-block;
+	text-align: right;
+}
+.register_content>div>form>div>span{
+	color: red;
+	font-size: 10px;
+}
+.register_content>div>form>div>input,.update>div>form>div>input{
+	width: 200px;
+}
+.update>div>form>button{
+	width: 100px;
+	margin: 20px;
+}
+.register_content>div>form>button{
+	width: 100px;
+	margin:20px 0 0 100px;
+}
+.update>div>form>p:last-child{
+	color: red;
+	font-size: 12px;
+	
+}
+.register_content>div>p:first-child{
+	margin-top:150px;
+}
+.register_content>div>p,.update>div>p{
+	font-size: 30px;
+	/*color:rgb(51,122,183);*/
+}
+.register_content>div>p:last-child{
+	margin-left: 90px;
+}
+.register_content>div>p:last-child>a:hover{
+	border-bottom: 1px solid;
+	color:rgb(91,192,222)	
+}

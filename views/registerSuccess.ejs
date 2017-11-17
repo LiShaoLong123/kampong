@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>微博-注册成功</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/img/favicon.ico" >
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/css.css" />
+		<link rel="stylesheet" type="text/css" href="/css/register.css" />
+	</head>
+	<body class="index_body">
+		<nav class="login_top top navbar navbar-default navbar-fixed-top">
+			<a href="../"><img src="/img/logo5.png"/></a>
+			<ul>
+				<li><a href="../">主页</a></li>
+				<li><a href="#">关于</a></li>
+				<li><a href="../login">登录</a></li>
+			</ul>
+		</nav>
+		<div class="index_content">
+			<div class="register_content  panel" >
+				<img src="/img/22.jpg"/>
+				<div>
+					<p><%= success %></p>
+					<p><%= user %></p>
+
+					<p>现在就去<a href="../login">登录</a></p>
+				</div>
+			</div>
+		</div>
+		
+<%- include footer %>

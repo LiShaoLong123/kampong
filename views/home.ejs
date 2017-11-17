@@ -1,0 +1,275 @@
+<%- include heard %>
+<div style="font-size: 12px;background:url(/img/bg.jpeg) no-repeat;background-attachment:fixed;" >
+	<div class="index_content" style="background:rgba(70,149,194,0.3)">
+		<div class="home_content_left panel"style="background:rgba(90,189,174,0.1) " >
+			<ul>
+				<li>
+					<a href="home">首页</a>
+				</li>
+				<li>
+					<a href="info?value=showMessage">我的消息</a>
+				</li>
+				<li>
+					<a href="info?value=showConcern">关注的人</a>
+				</li>
+				<li>
+					<a href="info?value=showFans">我的粉丝</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="home">热门消息</a>
+				</li>
+			</ul>
+
+		</div>
+		<div class="index_content_middle">
+
+			<form method="post"  enctype="multipart/form-data">
+				<div class="home_content_edit panel ">
+					<p class="txtHeight"><img src="" alt=""></p>
+					<p class="txtWidth"></p>
+					<p>最多发布140字</p>
+					<textarea  name="talk" class="talk" rows="4" placeholder="快来说点什么吧~~" maxlength="140"></textarea>
+					<span class="glyphicon glyphicon-piggy-bank" style="color: coral;"><span style="color:black;margin-left: 4px">表情</span></span>
+					<span class="glyphicon glyphicon-picture" style="color: lawngreen"><span style="color:black;margin-left: 4px">图片</span></span>
+					<button type="submit" class="btn btn-info sendTalk">发布</button>
+				</div>
+			</form>
+			<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h6 class="modal-title" id="myModalLabel">系统提示</h6>
+						</div>
+						<div class="modal-body">
+							请选择jpg/jpeg/png格式的图片上传
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="home_content_select panel">
+				<ul>
+					<li>
+						<a href="#">全部</a>
+					</li>
+					<li>
+						<a href="#">原创</a>
+					</li>
+					<li>
+						<a href="#">图片</a>
+					</li>
+
+				</ul>
+			</div>
+            <% if(talksAll&&talksAll.length!=0){
+				var leg=0;
+				if(talksAll.length<5){leg=talksAll.length;}
+				else{leg=5;}
+			for(var i=0;i<leg;i++){ %>
+			<div class="home_content_state panel">
+				<a href="personal/<%= talksAll[i].userInfo._id %>"><img class="img-circle" src="<%= talksAll[i].userInfo.userPic %>" /></a>
+				<div>
+					<p>
+						<a href="personal/<%= talksAll[i].userInfo._id %>" name="<%= talksAll[i]._id %>" userId="<%= talksAll[i].userInfo.userId%>">
+                            <%= talksAll[i].userInfo.userName %>
+						</a>
+					</p>
+					<p>
+                        <%= talksAll[i].talkTime.minute %>
+					</p>
+					<p>
+                        <%= talksAll[i].talk %>
+                        <% for(var j=0;j < talksAll[i].call.length;j++){ %>
+						<a target="_blank" href="personal/<%= talksAll[i].call[j].callId %>">@<%= talksAll[i].call[j].callName %></a>
+                        <% } %>
+					</p>
+					<div>
+                        <% for(var j=0;j < talksAll[i].talkPic.length;j++){ %>
+						<img src="./uploads/<%= talksAll[i].userInfo._id+'/'+talksAll[i].talkPic[j].filename %>" />
+                        <% } %>
+					</div>
+				</div>
+				<ul>
+
+					<li><span class="glyphicon glyphicon-comment">&nbsp<%= talksAll[i].comments.length%></span></li>
+					<li><span class="glyphicon glyphicon-thumbs-up" >&nbsp<%= talksAll[i].like.length%></span></li>
+					<li><a class="glyphicon glyphicon-send  bdsharebuttonbox bds_more" data-cmd="more">分享</a></li>
+				</ul>
+
+				<div class="home_content_comment">
+					<form action="/home/comment" method="post">
+						<div>
+							<input type="text" class="talk" name="comment" rep_id="<%= talksAll[i].userInfo._id %>" placeholder="评论"/>
+							<span class="glyphicon glyphicon-piggy-bank"></span>
+							<button type="button" class="btn-xs btn-info commentBtn">评论</button>
+						</div>
+
+					</form>
+
+
+				</div>
+			</div>
+
+            <% } %>
+			<!--<div class="home_content_bottom panel">
+                <a>加载更多...</a>
+            </div>-->
+            <%	}else{ %>
+
+			<div class="home_content_bottom panel">
+				<a href="../home">没有内容，点击这里去发布</a>
+			</div>
+            <% } %>
+
+		</div>
+		<div class="index_content_right">
+			<div class="home_content_login  panel ">
+				<div>
+					<a href="/personal/<%= user._id %>"><img class="img-circle" src="<%= user.userPic %>" /></a>
+				</div>
+				<p>
+					<a href="/personal/<%= user._id %>">
+                        <%= user.userName %>
+					</a>
+				</p>
+				<ul>
+					<li>
+						<a href="../info?value=showConcern">
+							<p>
+                                <%= crnUserlength %>
+							</p>
+							<p>关注</p>
+						</a>
+					</li>
+					<li>
+						<a href="../info?value=showFans">
+							<p>
+                                <% if (fans){%>
+                                <%= fans.length %>
+                                <% } %>
+							</p>
+							<p>粉丝</p>
+						</a>
+					</li>
+					<li>
+						<a href="../personal/<%= user._id %>">
+							<p>
+                                <% if (talks){%>
+                                <%= talks.length %>
+                                <% } %>
+							</p>
+							<p>动态</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="home_content_recommend panel panel-info">
+				<div>
+					<label>热门用户</label>
+				</div>
+				<ul>
+					<li>
+						<a href="#"><img class="img-circle" src="img/source/222.jpg" /></a>
+						<div>
+							<p class="name"><a href="https://weibo.com/liuyifeiofficial?topnav=1&wvr=6&topsug=1">drango</a></p>
+							<!--<p class="note">明星</p>-->
+							<p class="note">热度：101311</p>
+						</div>
+					</li>
+					<li>
+						<a href="#"><img class="img-circle" src="img/source/112.jpg" /></a>
+						<div>
+							<p class="name">zhiyou</p>
+							<!--<p class="note">知名星座博主</p>-->
+							<p class="note">热度：231011</p>
+						</div>
+					</li>
+					<li>
+						<a href="#"><img class="img-circle" src="img/source/111.jpg" /></a>
+						<div>
+							<p class="name">hao123</p>
+							<!--<p class="note">明星</p>-->
+							<p class="note">热度：234231</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="index_content_hot panel panel-info">
+				<div>
+					<label>热门话题</label>
+				</div>
+				<p>
+					<a href="#">#里约奥运会#</a>
+					<a>12341</a>
+				</p>
+				<p>
+					<a href="#">#朱丹的锁骨#</a>
+					<a>2345</a>
+				</p>
+				<p>
+					<a href="#">#奶奶说脱口秀#</a>
+					<a>4562</a>
+				</p>
+				<p>
+					<a href="#">#分手了还能做朋友吗#</a>
+					<a>364678</a>
+				</p>
+				<p>
+					<a href="#">#诛仙青云志#</a>
+					<a>34567</a>
+				</p>
+				<p>
+					<a href="#">#全民玩幻城#</a>
+					<a>2447</a>
+				</p>
+				<p>
+					<a href="#">#要求女生剪短发学生头#</a>
+					<a>34523</a>
+				</p>
+				<p>
+					<a href="#">#妈的智障#</a>
+					<a>8676</a>
+				</p>
+				<p>
+					<a href="#">#重庆美女吃8斤米饭#</a>
+					<a>3464</a>
+				</p>
+				<p>
+					<a href="#">#空中巴士来了#</a>
+					<a>3455</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<span class="glyphicon glyphicon-chevron-up home_Stickie"></span>
+</div>
+<script>
+    window._bd_share_config={
+        "common":{
+            "bdSnsKey":{},
+            "bdText":"",
+            "bdMini":"1",
+            "bdMiniList":false,
+            "bdPic":"",
+            "bdStyle":"0",
+            "bdSize":"16"
+        },
+        "share":{},
+        "image":{
+            "viewList":["qzone","tsina","tqq","renren","weixin"],
+            "viewText":"分享到：","viewSize":"16"
+        },
+        "selectShare":{
+            "bdContainerClass":null,
+            "bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]
+        }
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+
+</script>
+<%- include footer %>

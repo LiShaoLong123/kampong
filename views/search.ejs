@@ -1,0 +1,144 @@
+<%- include heard %>
+<div class="search_content">
+	<div class="search_content_top">
+		<form action="search" method="get">
+			<a href="home"><img src="img/logo2.gif" /></a>
+			<div class="search_type">
+				<input type="radio" name="searchType" id="synthesize" value="synthesize" checked="ture" />
+				<label for="synthesize">综合</label>
+				<input type="radio" name="searchType" value="topic" id="topic" />
+				<label for="topic">话题</label>
+				<input type="radio" name="searchType" value="topic" id="people" />
+				<label for="people">找人</label>
+			</div>
+			<div class="col-xs-8">
+				<div class="input-group input-group-lg">
+					<input type="text" name="searchKey" class="form-control" />
+					<span class="input-group-btn">
+					        <button class="btn btn-default " >
+					        	<span class="glyphicon glyphicon-search"></span>
+					</button>
+					</span>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="search_content_left">
+		<% if(topicError) {%>
+		<div class="search_content_state">
+			<p class="note topicError">
+				<%= topicError %>
+			</p>
+		</div>
+		<% } %>
+		<% if(talksUser.length!=0) 
+						for(i=0;i<talksUser.length;i++){
+							if(talksUser[i].talk==null){%>
+		<div class="search_content_state">
+			<a href="personal/<%= talksUser[i]._id %>"><img class="img-circle" src="<%= talksUser[i].userPic %>" /></a>
+			<div>
+				<p>
+					<a href="personal/<%= talksUser[i]._id %>" class="name" userId="<%= talksUser[i]._id %>">
+						<%= talksUser[i].userName %>
+					</a>
+					<% if(talksUser[i]._id!=user._id) {%><button class="btn btn-info searchCrn" value=""></button>
+					<% } %>
+				</p>
+				<p>
+					<%= talksUser[i].identity %>
+				</p>
+				<p>喜欢我就关注我吧</p>
+				<p>
+					<a>关注：
+						<%= talksUser[i].CrnNum %>
+					</a>
+					<a>粉丝：
+						<%= talksUser[i].fansNum %>
+					</a>
+					<a>动态：1000</a>
+				</p>
+			</div>
+		</div>
+		<% } else{ %>
+		<div class="search_content_state talks">
+			<a href="personal/<%= talksUser[i].userInfo._id %>#"><img class="img-circle" src="<%= talksUser[i].userInfo.userPic %>" /></a>
+			<div>
+				<p>
+					<a href="personal/<%= talksUser[i].userInfo._id %>"  name="<%= talksUser[i].userInfo._id %>">
+						<%= talksUser[i].userInfo.userName %>
+					</a>
+				</p>
+				<p>
+					<%= talksUser[i].talkTime.minute %>
+				</p>
+				<p>
+					<%= talksUser[i].talk %>
+				</p>
+				<div>
+					<% for(var j=0;j<talksUser[i].talkPic.length;j++){%>
+					<img src="./uploads/<%= talksUser[i].userInfo._id+'/'+talksUser[i].talkPic[j].filename %>" />
+					<% } %>
+				</div>
+			</div>
+			<ul>
+				<!--<li><span class="glyphicon glyphicon-share"><%= talksUser[i].share %></span></li>-->
+				<li><span class="glyphicon glyphicon-comment">&nbsp<%= talksUser[i].comments.length %></span></li>
+				<li><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= talksUser[i].like.length %></span></li>
+			</ul>
+				<div class="home_content_comment">
+					<form action="/home/comment" method="post">
+						<div>
+							<input type="text" class="talk" name="comment" rep_id="<%= talksUser._id %>" placeholder="评论"/>
+							<span class="glyphicon glyphicon-piggy-bank"></span>
+							<button type="button" class="btn-xs btn-info commentBtn">评论</button>
+						</div>
+
+					</form>
+				</div>
+		</div>
+		<% } } %>
+		<div class="search_content_bottom panel">
+			<a>加载更多...</a>
+		</div>
+	</div>
+	<div class="search_content_right panel">
+		<div>
+			<label>相关用户</label>
+		</div>
+		<ul>
+			<% if(userError) {%>
+			<li>
+				<p class="note userError">
+					<%= userError %>
+				</p>
+			</li>
+			<% } %>
+
+			<% if(talksUser.length!=0){ 
+							for(i=0;i<talksUser.length;i++){ 
+								if(talksUser[i].talk==null){ %>
+			<li>
+				<a  target="_blank" href="personal/<%= talksUser[i]._id %>"><img class="img-circle" src="<%= talksUser[i].userPic %>" /></a>
+				<div>
+					<p>
+						<a target="_blank" href="personal/<%= talksUser[i]._id %>" class="name">
+							<%= talksUser[i].userName %>
+						</a>
+					</p>
+					<p class="note">
+						<%= talksUser[i].identity %>
+					</p>
+					<p class="note">热度：101011</p>
+				</div>
+			</li>
+
+			<%			}	
+							}
+						} %>
+
+		</ul>
+	</div>
+</div>
+<span class="glyphicon glyphicon-chevron-up search_Stickie"></span>
+
+<%- include footer %>

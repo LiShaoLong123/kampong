@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/css.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/register.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/info.css"/>
+		
+	</head>
+	<body>
+		<div class="update">
+			<div class="changePwd">
+				<form action="/info/update"  class="form-inline" method="post">
+					<div class="form-group">
+						<label>原密码：</label>
+						<input type="password" class="form-control" name="oldPassword" placeholder="输入原密码">
+					</div>
+					<div class="form-group">
+						<label>新密码：</label>
+						<input type="password" class="form-control" name="newPassword" id="" placeholder="输入新密码">
+					</div>
+					<div class="form-group">
+						<label>确认密码：</label>
+						<input type="password" class="form-control" name="rePassword" placeholder="再次输入新密码">
+					</div>
+					<button class="btn btn-info">确认修改</button>
+					<p><%= error %></p>
+				</form>
+			</div>
+			<div class="userInfo">
+				<form action="/info/update" target="_parent" class="form-inline" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>帐号：</label>
+						<label><% if(user) {%><%= user.userId %><% } %></label>
+					</div>
+					<div class="form-group">
+						<div>
+							<input type="file" name="userPic" accept=".jpg,.jpeg,.png" id="userPic" />
+							<div>点击修改</div>
+						</div>
+						<label>头像：</label>
+						<img src="<% if(user) {%><%= user.userPic %><% } %>" class="img-circle"/>
+					</div>
+					<div class="form-group">
+						<label>昵称：</label>
+						<input type="text" class="form-control" name="userName" id="" placeholder="输入昵称" value="<% if(user) {%><%= user.userName %><% } %>">
+					</div>
+					<div class="form-group">
+						<label>性别：</label>
+						<% if (user&&user.sex=="女") { %>
+							<input type="radio" class="form-control" name="sex" id="man" value="男">
+							<label for="man">男</label>
+							<input type="radio" class="form-control" name="sex" id="women" value="女" checked="checked">
+							<label for="women">女</label>
+						<% } else if(user&&user.sex=="男"){ %>
+							<input type="radio" class="form-control" name="sex" id="man" value="男" checked="checked">
+							<label for="man">男</label>
+							<input type="radio" class="form-control" name="sex" id="women" value="女">
+							<label for="women">女</label>
+						<% } else { %>
+							<input type="radio" class="form-control" name="sex" id="man" value="男">
+							<label for="man">男</label>
+							<input type="radio" class="form-control" name="sex" id="women" value="女">
+							<label for="women">女</label>
+						<% } %>
+					</div>
+					<div class="form-group">
+						<label>身份：</label>
+						<input type="text" class="form-control" name="identity" id="" placeholder="选择您的身份" value="<% if(user) {%><%= user.identity %><% } %>">
+					</div>
+
+					<div class="form-group">
+						<label>邮箱：</label>
+						<input type="text" class="form-control" name="email" id="" placeholder="输入邮箱号" value="<% if(user) {%><%= user.email %><% } %>" >
+					</div>
+					<div class="form-group">
+						<label>手机号码：</label>
+						<input type="text" class="form-control" name="phone" placeholder="输入手机号" value="<% if(user) {%><%= user.phone %><% } %>">
+					</div>
+					<button class="btn btn-info">保存</button>
+				</form>
+				
+			</div>
+			<div class="updateSuccess">
+				<p><%= success %></p>
+				<p>去重新<a href="../login" target="_parent">登录</a></p>
+			</div>
+		</div>
+		<script src="/js/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/getUrlParam.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/info.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

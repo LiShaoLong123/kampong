@@ -1,0 +1,214 @@
+
+<%- include heard %>
+		<div class="index_content">
+			<div class="personal_top">
+
+				<div>
+					<div>
+						<% if(user&&user.userId == talksUser.userId){ %>
+						<a href="../info?value=showUserinfo"><div class="img-circle">编辑资料</div></a>
+						<% } %>
+						<img class="img-circle" src="<%= talksUser.userPic%>"/>
+						<p class="name" userId="<%= talksUser._id %>"><%= talksUser.userName%></p>
+						<% if(user&&user.userId != talksUser.userId){ %>
+							<button class="btn-xs btn-info concernBtn"  value="<%= crnStetus %>">关注</button>
+						<% } %>
+					</div>
+				</div>
+				<ul>
+					<% if(user&&user.userId == talksUser.userId){ %>
+					<li>我的动态</li>
+					<li>我的相册</li>
+					<li><a href="../info">个人中心</a></li>
+					<% } else {%>
+					<li>ta的动态</li>
+					<li>ta的相册</li>
+					<li><a href="/personal/<%= user._id %>">去我的主页</a></li>
+					<% } %>
+				</ul>
+			</div>
+			<div class="personal_content">
+				<div class="personal_content_left">
+					
+					<div class="panel">
+						<ul>
+							<li><p><a href="../info?value=showConcern"><%= crnUserlength %></a></p><p>关注</p></li>
+							<li><p><a href="../info?value=showConcern"><%= fans.length %></a></p><p>粉丝</p></li>
+							<li><p><a href="../personal/<%= talksUser._id %>"><%= talks.length %></a></p><p>动态</p></li>
+						</ul>
+					</div>
+					<div class="panel personal_info">
+						<div>
+							<h5>基本信息
+							<% if(user&&user.userId == talksUser.userId){ %>
+							<a href="../info?value=showUserinfo">编辑资料</a>
+							<% } %>
+							</h5>
+							<% if(user&&user.userId == talksUser.userId){ %>
+							<p>帐号：<% if(user){ %><%= talksUser.userId%><% } %></p>
+							<% } %>
+							<p>昵称：<%= talksUser.userName%></p>
+							<p>性别：<%= talksUser.sex%></p>
+							<p>身份：<%= talksUser.identity%></p>
+							<p>生日：<%= talksUser.birthday%></p>
+							<% if(user&&user.userId == talksUser.userId){ %>
+								<p><a href="../info?value=showUserinfo">更多...</a></p>
+							<% } %>
+						</div>
+					</div>
+					<div class="panel">
+							<h5>我的相册</h5>
+							<img src="/img/15.jpg"/>
+					</div>
+				</div>
+				<div class="personal_content_right">
+					<ul>
+						<li><a href="#">全部</a></li>
+						<li><a href="#">原创</a></li>
+						<li><a href="#">图片</a></li>
+					</ul>
+
+					<% if(talks&&talks.length!=0&&msg!=1){
+						for(var i=0;i<talks.length;i++){ %>
+					<div class="personal_content_state">
+						<a href="#"><img class="img-circle" src="<%= talksUser.userPic %>"/></a>
+						<div>
+							<p><a href="#" name="<%= talks[i]._id %>" userId="<%= talksUser.userId%>" ><%= talksUser.userName %></a>
+							<% if(user&&user.userId == talksUser.userId){ %>
+								<span class="caret"></span>
+								<a class="deleteTalk" data-toggle="modal" data-target="#myModal">删除</a></p>
+							<% } %>
+							<p><%= talks[i].talkTime.minute %></p>
+							<p><%= talks[i].talk %>
+
+								<% for(var j=0;j < talks[i].call.length;j++){ %>
+									<a target="_blank" href="personal/<%= talks[i].call[j].callId %>">@<%= talks[i].call[j].callName %></a>
+								<% } %>
+							</p>
+							<div>
+								<% for(var j=0;j<talks[i].talkPic.length;j++){%>
+									<img src="../uploads/<%= talksUser._id+'/'+talks[i].talkPic[j].filename %>" />
+								<% } %>
+								
+							</div>
+						</div>
+						<ul>
+							<!--<li><span class="glyphicon glyphicon-share">&nbsp<%= talks[i].share%></span></li>-->
+							<li><span class="glyphicon glyphicon-comment">&nbsp<%= talks[i].comments.length%></span></li>
+							<li><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= talks[i].like.length%></span></li>
+							<li><a class="glyphicon glyphicon-send  bdsharebuttonbox bds_more" data-cmd="more">分享</a></li>
+						</ul>
+						<div class="home_content_comment">
+							<form action="/home/comment" method="post">
+								<div>
+									<input type="text" class="talk" name="comment" rep_id="<%= talksUser._id %>" placeholder="评论"/>
+									<span class="glyphicon glyphicon-piggy-bank"></span>
+									<button type="button" class="btn-xs btn-info commentBtn">评论</button>
+								</div>
+
+							</form>
+							
+							
+						</div>
+					</div>
+					
+					<% } %>
+					<!--<div class="personal_content_bottom panel">
+						<a>加载更多...</a>
+					</div>-->
+					<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+						  <div class="modal-dialog modal-sm" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h6 class="modal-title" id="myModalLabel">系统提示</h6>
+						      </div>
+						      <div class="modal-body">
+						        	确定删除这条微博吗
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						        <button type="button" class="btn btn-primary" id="deleteTalk">确认</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					<%	}else if(msg==1){  %>
+							<div class="personal_content_state">
+								<a href="../personal/<%= message.msgInfo._id %>"><img class="img-circle" src="<%= message.msgInfo.userPic %>"/></a>
+								<div>
+									<p><a href="../personal/<%= message.msgInfo._id %>" name="<%= message._id %>" userId="<%= message.msgInfo.userId%>" ><%= message.msgInfo.userName %></a>
+									<p><%=  message.talkTime.minute %></p>
+									<p><%= message.talk %>
+
+										<% for(var j=0;j < message.call.length;j++){ %>
+											<a target="_blank" href="../personal/<%= message.call[j].callId %>">@<%= message.call[j].callName %></a>
+										<% } %>
+									</p>
+									<div>
+										<% for(var j=0;j<message.talkPic.length;j++){%>
+											<img src="../uploads/<%= message.msgInfo._id+'/'+message.talkPic[j].filename %>" />
+										<% } %>
+										
+									</div>
+								</div>
+								<ul>
+									<!--<li><span class="glyphicon glyphicon-share">&nbsp<%= message.share%></span></li>-->
+									<li><span class="glyphicon glyphicon-comment">&nbsp<%= message.comments.length%></span></li>
+									<li><span class="glyphicon glyphicon-thumbs-up">&nbsp<%= message.like.length%></span></li>
+									<li><a class="glyphicon glyphicon-send  bdsharebuttonbox bds_more" data-cmd="more">分享</a></li>
+								</ul>
+								<div class="home_content_comment">
+									<form action="/home/comment" method="post">
+										<div>
+											<input type="text" class="talk" name="comment" rep_id="<%= message.msgInfo._id %>" placeholder="评论"/>
+											<span class="glyphicon glyphicon-piggy-bank"></span>
+											<button type="button" class="btn-xs btn-info commentBtn">评论</button>
+										</div>
+
+									</form>
+									
+									
+								</div>
+							</div>
+					<%	}else{ %>
+					
+					<div class="personal_content_bottom panel">
+						<a href="../home">没有内容，
+						<% if(user&&user.userId == talksUser.userId){ %>
+						点击这里去发布
+						<% }else{ %>
+						返回我的主页
+						<% } %>
+						</a>
+					</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+<span class="glyphicon glyphicon-chevron-up personal_Stickie"></span>
+<script>
+    window._bd_share_config={
+        "common":{
+            "bdSnsKey":{},
+            "bdText":"",
+            "bdMini":"1",
+            "bdMiniList":false,
+            "bdPic":"",
+            "bdStyle":"0",
+            "bdSize":"16"
+        },
+        "share":{},
+        "image":{
+            "viewList":["qzone","tsina","tqq","renren","weixin"],
+            "viewText":"分享到：","viewSize":"16"
+        },
+        "selectShare":{
+            "bdContainerClass":null,
+            "bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]
+        }
+    };
+    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+
+</script>
+<%- include footer %>

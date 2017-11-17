@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="/css/info.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/css.css"/>
+
+	</head>
+	<body class="iframe_body">
+		<div class="fans">
+			<p>&nbsp;</p>
+			<% if(concernUser) {
+				for(var i=0;i<concernUser.length;i++){%>
+			<div>
+				<div>
+					<a href="../personal/<%= concernUser[i]._id %>" target="_parent"><img class="img-circle" src="<%= concernUser[i].userPic %>"/></a>
+				</div>
+				<p><a href="../personal/<%= concernUser[i]._id %>"><%= concernUser[i].userName %></a></p>
+			</div>
+			<% }
+			} %>
+			<% if(fansUser) {
+				for(var i=0;i<fansUser.length;i++){%>
+			<div>
+				<div>
+					<a href="../personal/<%= fansUser[i]._id %>" target="_parent"><img class="img-circle" src="<%= fansUser[i].userPic %>"/></a>
+				</div>
+				<p><a href="../personal/<%= fansUser[i]._id %>"><%= fansUser[i].userName %></a></p>
+			</div>
+			<% }
+			} %>
+		</div>
+		<div class="paging">
+			<nav>
+			  <ul class="pagination">
+			    <li class="disabled">
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li class="active"><a href="#">1</a></li>
+			   <!--  <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li> -->
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+		<script type="text/javascript" src="/js/jquery-3.0.0.min.js" ></script>
+		<script type="text/javascript" src="/js/getUrlParam.js" ></script>
+		<script type="text/javascript" src="/js/info.js" ></script>
+	</body>
+	
+</html>

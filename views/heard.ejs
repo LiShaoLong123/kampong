@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title><%= title %></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=1.0"/>
+		<link rel="shortcut icon" href="/img/favicon.ico" >
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/css.css" />
+		<link rel="stylesheet" type="text/css" href="../css/home.css" />
+		<link rel="stylesheet" type="text/css" href="../css/info.css" />
+		<link rel="stylesheet" type="text/css" href="../css/presonal.css" />
+		<link rel="stylesheet" type="text/css" href="../css/search.css" />
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+
+
+	</head>
+	<body class="index_body">
+		<% if(!user){%>
+		<nav class="index_top top navbar navbar-default navbar-fixed-top ">
+			<div class="index_top_content">
+				<a href="../"><img src="/img/logo6.png"/></a>
+				<form method="get" action="search">
+					<div class="col-xs-5">
+					    <div class="input-group">
+					      <input type="text" name="searchKey" class="form-control" placeholder="搜索话题、找人" />
+					      <span class="input-group-btn">
+					        <button class="btn btn-default ">
+					        	<span class="glyphicon glyphicon-search"></span>
+					        </button>
+					      </span>
+					    </div>
+					</div>
+				</form>
+				<ul >
+					<li ><a href="../home">
+							<i class="glyphicon glyphicon-home"></i>
+							首页
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<i class="fa fa-id-card-o"></i>
+							发现
+						</a>
+					</li>
+					<li><a href="#">游戏</a></li>
+					<li><a href="/register"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+					<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<% }else{ %>
+
+		<nav class="index_top top navbar navbar-default navbar-fixed-top">
+			<div class="home_top_content">
+				<a href="/home"><img src="/img/logo5.png"/></a>
+				<form action="../search" method="get">
+					<div class="col-xs-5">
+					    <div class="input-group">
+					      <input type="text" name="searchKey" class="form-control" placeholder="搜索话题、找人" />
+					      <span class="input-group-btn">
+					        <button class="btn btn-default ">
+					        	<span class="glyphicon glyphicon-search"></span>
+					        </button>
+					      </span>
+					    </div>
+					</div>
+				</form>
+				
+				<ul >
+					<li>
+						<a href="../home">
+						<span class="glyphicon glyphicon-home" >&nbsp;首页</span>
+						</a>
+					</li>
+					<li>
+						<a href="/info?value=showMessage">
+						<span class="glyphicon glyphicon-envelope" >&nbsp;消息</span>
+						</a>
+					</li>
+					<li role="presentation" class="dropdown">
+				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+
+				      <span class="glyphicon glyphicon-user" userId="<%= user.userId %>">&nbsp;<%= user.userName %></span> <span class="caret"></span>
+				    </a>
+				    <ul class="dropdown-menu">
+				     	<li><a href="../personal/<%= user._id %>">个人空间</a></li>
+				     	<li><a href="../info?value=showUserinfo">帐号设置</a></li>
+				     	<li><a href="../login/logout">退出</a></li>
+
+				    </ul>
+				  </li>
+				</ul>
+			</div>
+		</nav>
+
+		<% } %>

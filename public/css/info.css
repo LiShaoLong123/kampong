@@ -1,0 +1,130 @@
+.info_middle{
+	width: 1000px;
+	margin: 5px auto;
+	overflow: auto;
+	zoom: 1;
+}
+
+.info_middle .info_nav{
+	width: 150px;
+	float: left;
+}
+.info_middle .info_nav>ul{
+	margin:20px 0 20px 30px; 
+	padding: 10px;
+	line-height: 30px;
+	border-right: 1px solid #e1e8ed;
+}
+.info_middle .info_nav>ul>li>div{
+	border-bottom: 1px solid #e1e8ed;
+}
+.info_middle .info_nav>ul>li>ul{
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+.info_middle .info_nav>ul>li>ul a{
+	color: #666;
+}
+.info_middle .info_content{
+	padding: 20px;
+	float: left;
+}
+.info_middle .info_content iframe{
+	width: 805px;
+	height: 500px;
+	border: 0px solid #000000;
+}
+.update{
+	width: 805px;
+	text-align: center;
+}
+
+.update .changePwd{
+	display: none;
+}
+.update .userInfo{
+	width: 440px;
+	display: none;
+}
+.update .userInfo div{
+	width: 500px;
+	text-align: left;
+}
+.update .userInfo div:nth-child(2)>img{
+	width:50px;
+	height: 50px;
+}
+.update .userInfo div:nth-child(2)>div>input[type="file"],.update .userInfo div:nth-child(2)>div>div{
+	position: absolute;
+	width:50px;
+	height: 50px;
+	line-height: 50px;
+	margin-left: 164px;
+	font-size: 12px;
+
+}
+
+
+.update .userInfo div:nth-child(2)>div>input[type="file"]{
+	z-index: 2;
+	margin-top: -10px;
+	height: 50px;
+	cursor: pointer;
+	line-height: 10px;
+	filter:alpha(opacity=0);  
+    -moz-opacity:0;  
+    -khtml-opacity: 0;  
+    opacity: 0;
+}
+.update .userInfo div:nth-child(4)>label:not(:first-child){
+	text-align: left;
+	width: 40px;
+}
+.update .userInfo div:nth-child(1)>label:not(:first-child){
+	text-align: left;
+	width: 150px;
+}
+.update .userInfo div select{
+	width: 100px;
+}
+.update .updateSuccess{
+	width: 500px;
+	margin: 150px;
+	display: none;
+}
+.fans,.message{
+	height: 420px;
+	width: 805px;
+}
+
+.fans>p{
+	border-bottom: 1px solid #e1e8ed;
+	margin-left: 30px;
+	font-weight: bold;
+}
+.fans>div{
+	width: 80px;
+	height: 80px;
+	margin: 10px;
+	float: left;
+	text-align: center;
+	/*border: 1px solid #000;*/
+}
+.fans>div>div img{
+	width: 50px;
+	height: 50px;
+}
+.fans>div>p>a{
+	color:#666;
+}
+.paging{
+	margin: 0 auto;
+	width: 300px;
+}
+.paging .omit{
+	cursor: default;
+}
+.paging .omit:hover{
+	background: #fff;
+}

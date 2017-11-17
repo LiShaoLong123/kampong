@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Weibo注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="/img/favicon.ico" >
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/css/css.css" />
+		<link rel="stylesheet" type="text/css" href="/css/register.css" />
+	</head>
+	<body class="index_body">
+		<nav class="login_top top navbar navbar-default navbar-fixed-top">
+			<a href="../"><img src="/img/logo5.png"/></a>
+			<ul>
+				<li><a href="../">主页</a></li>
+				<li><a href="#">关于</a></li>
+				<li><a href="../login">登录</a></li>
+			</ul>
+		</nav>
+		<div class="index_content">
+			<div class="register_content  panel" >
+				<img src="/img/12.jpg"/>
+				<div>
+					<form action="" class="form-inline" method="post">
+						<div class="form-group">
+							<label>帐号：</label>
+							<input type="email" class="form-control" name="userId" id="userId" placeholder="输入邮箱号/手机号">
+						</div>
+						<div class="form-group">
+							<label>密码：</label>
+							<input type="password" class="form-control" name="password" id="password" placeholder="输入密码">
+						</div>
+						<div class="form-group">
+							<label>确认密码：</label>
+							<input type="password" class="form-control" name="re_password" id="re_password" placeholder="再次输入密码">
+						</div>
+						<button class="btn btn-info " id="regBtn">注册</button>
+					</form>
+					
+				</div>
+			</div>
+		</div>
+<%- include footer %>
